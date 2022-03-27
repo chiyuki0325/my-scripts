@@ -1,0 +1,27 @@
+#!/bin/bash
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+if [ "$#" != "1" ];then
+echo "语法错误。应为： gambas-packager 程序名。";exit
+fi
+
+if [ ! -f "$(pwd)/$1.gambas" ];then
+echo "文件不存在。";exit
+fi
+
+
+echo "正在打包 ..."
+mkdir -p "$(pwd)/$1.d/lib"
+cp -r "/usr/lib/gambas3" "$(pwd)/$1.d/lib/gambas3"
+cp "$(pwd)/$1.gambas" "$(pwd)/$1.d/$1.gambas"
+cp "/usr/bin/gbr3" "$(pwd)/$1.d/gbr3"
+echo "#!/bin/bash" > "$(pwd)/$1.d/$1"
+echo "PROGRAM_NAME='$1'" >> "$(pwd)/$1.d/$1"
+echo "DIR=\"\$(cd \"\$(dirname \"\$0\")\" && pwd)\""  >> "$(pwd)/$1.d/$1"
+echo 'LD_LIBRARY_PATH="$(pwd)/lib" "${DIR}/gbr3" "${DIR}/${PROGRAM_NAME}.gambas" $@'  >> "$(pwd)/$1.d/$1"
+chmod +x "$(pwd)/$1.d/$1"
+makeself --tar-quietly --nox11 --nocrc --noprogress --nomd5 --quiet "$(pwd)/$1.d" $1 "$1" ./$1
+sed -i "s/Verifying archive integrity...//" $1
+sed -i "s/echo \" All good.\"/MS_Printf \"\"/" $1
+sed -i "s/Uncompressing \$label//" $1
+echo "打包完成！"
