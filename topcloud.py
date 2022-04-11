@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from re import sub
 from os import popen
 from subprocess import Popen,PIPE
@@ -62,7 +63,7 @@ def topcloud():
         ).generate_from_frequencies(resource_dict)
     except ValueError:
         return "error"
-    cloud.to_file("cloud.png")
+    cloud.to_file("/tmp/cloud.png")
     return "success"
 
 def execute(command):
