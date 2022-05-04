@@ -1,10 +1,41 @@
 #!/bin/bash
-# 通过某种“奇怪”方式勉强实现 Quick Look
+# 通过某种奇怪方式实现类 Mac OS 的 「快速预览」
+# 依赖： sushi gloobus-preview hawkeye-quicklook-git (AUR)
+
 xdotool key  --delay 0 --clearmodifiers Ctrl+c # 复制选中文件
-filepath=`xclip -selection clipboard -o | sed 's|^file://||'` # 获取文件名
-sushi "$filepath" # 弹出预览窗口
+
+FILE_PATH=`xclip -selection clipboard -o | sed 's|^file://||'`
+FILE_NAME="`basename "$FILE_PATH"`"
+# 获取文件名
+
+FILE_MIME=`file --mime-type "$FILE_PATH" | awk -F": " '{print $2}'`
+FILE_MIME_1=`echo $FILE_MIME | awk -F"/" '{print $1}'`
+FILE_MIME_2=`echo $FILE_MIME | awk -F"/" '{print $2}'`
+# 获取 mimetype
+if [ ${FILE_NAME: -3} == ".md" ]; then
+    # markdown 使用 hawkeye 打开
+    hawkeye --uri="file://${FILE_PATH}"
+    notify-send "md"
+else
+    if [ $FILE_MIME_1 == "text" ]; then
+        if [ $FILE_MIME_2 == "plain" ]; then
+            sushi "$FILE_PATH"
+        else
+            gloobus-preview "$FILE_PATH"
+        fi
+    else
+        if [[ $FILE_MIME_1 == "image" ]] || [[ $FILE_MIME_1 == "audio" ]] || [[ $FILE_MIME_1 == "video" ]] || [[ $FILE_MIME_2 == "pdf" ]]; then
+            sushi "$FILE_PATH"
+        else
+            gloobus-preview "$FILE_PATH"
+        fi
+    fi
+fi
+# 根据文件类型弹出不同预览窗口
+
+xdotool keyup Ctrl # 松开 Ctrl
+xdotool keyup space # 松开 Space
 sleep 0.08s # 等待窗口开启
-bn="`basename "$filepath"`" # 获取文件名
-windowid=`xdotool search --name "$bn"` # 获取窗口 ID
-windowid=`echo $windowid | sed "s/\n/ /"` # 没毛用，玄学东西
-xdotool windowactivate $windowid # 将窗口置于前台
+WINDOW_ID=`xdotool search --name "$FILE_NAME"` # 获取窗口 ID
+WINDOW_ID=`echo $WINDOW_ID | sed "s/\n/ /"` # 没毛用，玄学东西，降低出错率
+xdotool windowactivate $WINDOW_ID # 将窗口置于前台
