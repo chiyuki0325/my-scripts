@@ -1,6 +1,7 @@
 #!/bin/bash
 # 通过某种奇怪方式实现类 Mac OS 的 「快速预览」
-# 依赖： sushi gloobus-preview hawkeye-quicklook-git (AUR)
+# 依赖：xclip xdotool sushi gloobus-preview hawkeye-quicklook-git (AUR)
+# GitHub 已经不支持 git:// 克隆，于是需要修改 hawkeye-quicklook-git 的 PKGBUILD，git:// 改为 git+https:// 。
 
 xclip -selection clipboard -o > /tmp/selection # 备份当前剪贴板
 xdotool key  --delay 0 --clearmodifiers Ctrl+c # 复制选中文件
@@ -16,7 +17,9 @@ FILE_MIME_2=`echo $FILE_MIME | awk -F"/" '{print $2}'`
 if [ ${FILE_NAME: -3} == ".md" ]; then
     # markdown 使用 hawkeye 打开
     hawkeye --uri="file://${FILE_PATH}"
-    notify-send "md"
+elif [ ${FILE_NAME: -4} == ".xml" ]; then
+    # xml 使用 gloobus-preview 打开
+    gloobus-preview "$FILE_PATH"
 else
     if [ $FILE_MIME_1 == "text" ]; then
         if [ $FILE_MIME_2 == "plain" ]; then
