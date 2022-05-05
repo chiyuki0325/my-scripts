@@ -2,6 +2,7 @@
 # 通过某种奇怪方式实现类 Mac OS 的 「快速预览」
 # 依赖： sushi gloobus-preview hawkeye-quicklook-git (AUR)
 
+xclip -selection clipboard -o > /tmp/selection # 备份当前剪贴板
 xdotool key  --delay 0 --clearmodifiers Ctrl+c # 复制选中文件
 
 FILE_PATH=`xclip -selection clipboard -o | sed 's|^file://||'`
@@ -39,3 +40,6 @@ sleep 0.08s # 等待窗口开启
 WINDOW_ID=`xdotool search --name "$FILE_NAME"` # 获取窗口 ID
 WINDOW_ID=`echo $WINDOW_ID | sed "s/\n/ /"` # 没毛用，玄学东西，降低出错率
 xdotool windowactivate $WINDOW_ID # 将窗口置于前台
+
+xclip -i -selection clipboard < /tmp/selection # 导入备份的剪贴板文件
+rm /tmp/selection # 删除备份，清理内存
