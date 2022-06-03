@@ -5,4 +5,4 @@ Type = Package
 Target = wps-office-cn
 [Action]
 When = PostTransaction
-Exec = /usr/bin/bash -c 'mv /usr/bin/wps /usr/bin/wps.bak; mv /usr/bin/wpp /usr/bin/wpp.bak; mv /usr/bin/et /usr/bin/et.bak; mv /usr/bin/wpspdf /usr/bin/wpspdf.bak; echo "wps-wrapper wps.bak">/usr/bin/wps; echo "wps-wrapper et.bak">/usr/bin/et; echo "wps-wrapper wpp.bak">/usr/bin/wpp; echo "wps-wrapper wpspdf.bak">/usr/bin/wpspdf; chmod +x /usr/bin/wps; chmod +x /usr/bin/wpp; chmod +x /usr/bin/et; chmod +x /usr/bin/wpspdf'
+Exec = /usr/bin/bash -c 'mv /usr/bin/wps /usr/bin/wps.bak; mv /usr/bin/wpp /usr/bin/wpp.bak; mv /usr/bin/et /usr/bin/et.bak; mv /usr/bin/wpspdf /usr/bin/wpspdf.bak; echo "#!/bin/bash">/usr/bin/wps; echo "#!/bin/bash">/usr/bin/wpp; echo "#!/bin/bash">/usr/bin/et; echo "#!/bin/bash">/usr/bin/wpspdf; echo "wps-wrapper wps.bak">>/usr/bin/wps; echo "wps-wrapper et.bak">>/usr/bin/et; echo "wps-wrapper wpp.bak">>/usr/bin/wpp; echo "wps-wrapper wpspdf.bak">>/usr/bin/wpspdf; chmod +x /usr/bin/wps; chmod +x /usr/bin/wpp; chmod +x /usr/bin/et; chmod +x /usr/bin/wpspdf'
