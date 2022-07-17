@@ -7,9 +7,7 @@ import re
 import os
 import json
 
-#change them both
 space=u' '
-space2=' '
 
 replace_dict = json.loads(open(os.path.abspath(os.path.dirname(__file__))+"/pretty-type.json").read())
 
@@ -77,8 +75,8 @@ original_text = pyperclip.paste()
 processed_text=_chinese_auto_spacing(original_text)
 
 for item in replace_dict:
-    reg = re.compile(re.escape(space2+item+space2), re.IGNORECASE)
-    processed_text=re.sub(reg,space2+replace_dict[item]+space2, processed_text)
+    reg = re.compile(re.escape(item), re.IGNORECASE)
+    processed_text=re.sub(reg,replace_dict[item], processed_text)
 
 # and~ paste it!
 pyperclip.copy(processed_text)
@@ -88,6 +86,6 @@ sleep(0.03)
 subprocess.Popen(["xdotool", "key", "Ctrl+v"])
 sleep(0.03)
 subprocess.Popen(["xdotool", "key", "Right"])
-if not "\n" in original_text:
-    sleep(0.1)
-    subprocess.Popen(["xdotool", "key", "BackSpace"])
+#if "\n" in original_text:
+    #sleep(0.1)
+    #subprocess.Popen(["xdotool", "key", "BackSpace"])

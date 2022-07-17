@@ -19,5 +19,9 @@
     "obs": "OBS",
     "kde":"KDE",
     "xfce":"XFCE",
-    "gnome":"GNOME"
+    "gnome":"GNOME",
+    "python":"Python",
+    "vb":"VB",
+    "c++":"C++",
+    "qq":"QQ"
 }
