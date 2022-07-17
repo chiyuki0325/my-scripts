@@ -1,0 +1,23 @@
+{
+    "macos":"macOS",
+    "mac os":"macOS",
+    "windows":"Windows",
+    "arch":"Arch",
+    "archlinux":"Arch Linux",
+    "linux":"Linux",
+    "archwiki":"Arch Wiki",
+    "vscode":"VS Code",
+    "ubuntu":"Ubuntu",
+    "google":"Google",
+    "duckduckgo":"DuckDuckGo",
+    "github":"GitHub",
+    "cloudflare":"Cloudflare",
+    "telegram":"Telegram",
+    "centos":"CentOS",
+    "mihoyo": "miHoYo",
+    "livecd":"Live CD",
+    "obs": "OBS",
+    "kde":"KDE",
+    "xfce":"XFCE",
+    "gnome":"GNOME"
+}
