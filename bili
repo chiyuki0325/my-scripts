@@ -96,7 +96,7 @@ for arg in ${@}; do
 done
 
 URL="$(echo "$1" | awk -F'?' '{print $1}')"
-BVID="$(echo "$URL" | awk -F'/video/' '{print $2}')"
+BVID="$(echo "$URL" | awk -F'/video/' '{print $2}' | awk -F'/' '{print $1}')"
 
 echo -e "\033[1;34m::\033[1;0m Creating cache folder...\033[0m"
 mkdir -p "/tmp/$BVID"
@@ -109,8 +109,9 @@ else
 fi
 eval "${CMD}"
 
-echo -e "\033[1;34m::\033[1;0m Downloading danmaku...\033[0m"
+echo -e "\033[1;34m::\033[1;0m Parsing danmaku ${BVID}...\033[0m"
 CID="$(curl -s "https://api.bilibili.com/x/player/pagelist?bvid=${BVID}&jsonp=jsonp" | jq '.data[0].cid')"
+echo -e "\033[1;34m::\033[1;0m Downloading danmaku ${CID}...\033[0m"
 DANMAKU_POOL="https://api.bilibili.com/x/v2/dm/web/seg.so?type=1&oid=${CID}&segment_index=1"
 curl -s "$DANMAKU_POOL" -o "/tmp/${BVID}/seg.so"
 
