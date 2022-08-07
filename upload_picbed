@@ -1,0 +1,35 @@
+#!/bin/bash
+cookie_BDUSS=""
+cookie_BAIDUID=""
+cookie_BIDUPSID=""
+useragent="Mozilla/5.0 (X11; Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0"
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+echo ""
+echo "开始白嫖李彦宏"
+echo ""
+echo "==================="
+for file in *; do
+    success=False
+    count=1
+    while [ "$success" = "False" ];do
+    curl_out="$(curl -A "$useragent" -s --cookie "BDUSS=${cookie_BDUSS};BAIDUID=${cookie_BAIDUID};BIDUPSID=${cookie_BIDUPSID};userFrom=www.baidu.com;ORIGIN=2" -H "Referer:www.baidu.com" "https://sp0.baidu.com/6_R1fD_bAAd3otqbppnN2DJv/Pic/upload?pid=super&app=skin&logid=2915142959" -F "file=@$file")"
+    test="$(echo "$curl_out" | grep html)"
+    test=$test"$(echo "$curl_out" | grep annoymous)"
+    if [[ "$test" == "" ]];then
+        printf "$curl_out" | jq -r ".data.pic_water" | sed "s/http/https/" >> /tmp/result.txt
+        success=True
+        echo "$file 上传完成，共请求 $count 次。"
+    else
+        count=$(($count+1))
+    fi
+    done
+done
+echo ""
+echo "==================="
+echo ""
+echo "白嫖完毕，结果位于 /tmp/result.txt"
+echo ""
+cat "/tmp/result.txt"
+IFS=$SAVEIFS
