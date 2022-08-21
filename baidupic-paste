@@ -26,7 +26,7 @@ while [ "$success" = "False" ];do
     fi
     if [[ "$test" == "" ]];then
         url=$(printf "$curl_out" | jq -r ".data.pic_water" | sed "s/http/https/")
-        printf "$url" | xclip -sel clipboard -i
+        printf "![]($url)" | xclip -sel clipboard -i
         success=True
         rm "$filename"
         notify-send -a "剪贴板中的截图上传完成" "链接已复制到剪贴板" "共请求 $count 次。"

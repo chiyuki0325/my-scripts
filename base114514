@@ -1,0 +1,111 @@
+#!/usr/bin/env python
+
+from ast import Bytes
+from base64 import b64decode, b64encode
+import sys
+
+encodeDict = {'A': '1145', 'B': '1154', 'C': '1514', 'D': '1415', 'E': '1541', 'F': '1451', 'G': '5114', 'H': '4115', 'I': '5141', 'J': '4151', 'K': '4511', 'L': '5411', 'M': '5541', 'N': '5514', 'O': '5154', 'P': '5451', 'Q': '5145', 'R': '5415', 'S': '1554', 'T': '4551', 'U': '4515', 'V': '1545', 'W': '1455', 'X': '4155', 'Y': '4415', 'Z': '4451', 'a': '4541', 'b': '4145', 'c': '4154', 'd': '4514', 'e': '1445', 'f': '5441',
+              'g': '1454', 'h': '5414', 'i': '5144', 'j': '1544', 'k': '1114', 'l': '1115', 'm': '5551', 'n': '5554', 'o': '4441', 'p': '4445', 'q': '1151', 'r': '1141', 's': '5515', 't': '5545', 'u': '4454', 'v': '4414', 'w': '1511', 'x': '1411', 'y': '4544', 'z': '4144', '0': '5455', '1': '5155', '2': '1111', '3': '4444', '4': '5555', '5': '1155', '6': '1144', '7': '5511', '8': '5544', '9': '4455', '+': '4411', '/': '5114', '=': '4115'}
+decodeDict = {'1145': 'A', '1154': 'B', '1514': 'C', '1415': 'D', '1541': 'E', '1451': 'F', '5114': '/', '4115': '=', '5141': 'I', '4151': 'J', '4511': 'K', '5411': 'L', '5541': 'M', '5514': 'N', '5154': 'O', '5451': 'P', '5145': 'Q', '5415': 'R', '1554': 'S', '4551': 'T', '4515': 'U', '1545': 'V', '1455': 'W', '4155': 'X', '4415': 'Y', '4451': 'Z', '4541': 'a', '4145': 'b', '4154': 'c', '4514': 'd', '1445': 'e',
+              '5441': 'f', '1454': 'g', '5414': 'h', '5144': 'i', '1544': 'j', '1114': 'k', '1115': 'l', '5551': 'm', '5554': 'n', '4441': 'o', '4445': 'p', '1151': 'q', '1141': 'r', '5515': 's', '5545': 't', '4454': 'u', '4414': 'v', '1511': 'w', '1411': 'x', '4544': 'y', '4144': 'z', '5455': '0', '5155': '1', '1111': '2', '4444': '3', '5555': '4', '1155': '5', '1144': '6', '5511': '7', '5544': '8', '4455': '9', '4411': '+'}
+
+wrap = 76
+decode = False
+ignoreGarbage = False
+fileName = ""
+sys.argv.pop(0)
+for arg in sys.argv:
+    if arg == '--help':
+        print('用法：base114514 [选项]... [文件]')
+        print('Base114514 编码或解码 <文件> 或标准输入，并输出到标准输出。\n')
+        print('如果没有指定 <文件>，或者 <文件> 为 "-"，则从标准输入读取。\n')
+        print('长选项的必选参数对于短选项也是必选的。')
+        print('  -d, --decode          解码数据')
+        print('  -i, --ignore-garbage  解码时忽略非字母字符')
+        print('  -w, --wrap=列数       在指定的 <列数> 后自动换行（默认为 76）。')
+        print('                          0 为禁用自动换行')
+        print('      --version     显示版本信息并退出\n')
+        print('数据以 一刀斩 规定的 base114514 数字表的格式进行编码。')
+        print('解码时，输入数据除了包含正式的 base114514 数字表的字节以外，还可能包含一些')
+        print('换行符。使用 --ignore-garbage 来使程序在已编码的流中遇到字母表以外的')
+        print('字节后尝试恢复执行。')
+        exit()
+
+    elif arg == '--version':
+        print('''
+base114514 (下北沢 coreutils) 114.5.1.4
+
+           ▃▆█▇▄▖
+        ▟◤▖　    ◥█▎
+      ◢◤　   ▐　   ▐▉
+    ▗◤　   ▂　▗▖   ▕█▎
+    ◤　▗▅▖◥▄　▀◣    █▊
+    ▐　▕▎◥▖◣◤　    ◢██
+    █◣　◥▅█▀　   ▐██◤
+               ◢██◤
+     ◥██◣     ◢▄◤
+        ▀██▅▇▀
+
+哼,哼,哼,啊啊啊啊啊啊啊啊啊啊啊啊啊!
+        ''')
+        exit()
+    elif arg.startswith('-w') or arg.startswith('--wrap'):
+        wrap = int(arg.replace('--wrap=', '').replace('-w', ''))
+    elif arg == '-d' or arg == '--decode':
+        decode = True
+    elif arg == '-i' or arg == '--ignore-garbage':
+        ignoreGarbage = True
+    elif arg.startswith('-'):
+        print('base114514: 不适用的选项 -- '+arg.replace('-', ''))
+        print('请尝试执行 "base114514 --help" 来获取更多信息。')
+        exit()
+    else:
+        if fileName == "":
+            fileName = arg
+        else:
+            print('base114514: 多余的操作对象 "'+arg+'"')
+            print('请尝试执行 "base114514 --help" 来获取更多信息。')
+            exit()
+
+
+def b114514encode(strToEncode: str):
+    retVal = ""
+    for i in b64encode(strToEncode.encode('utf-8')).decode('utf-8'):
+        retVal += encodeDict[i]
+    return retVal
+
+
+def b114514decode(strToDecode, ignoreGarbages: bool = False):
+    retVal = ""
+    for i in range(len(strToDecode)//4):
+        if ignoreGarbages == True:
+            if not i in ['1', '5', '4']:
+                continue
+        retVal += decodeDict[strToDecode[i*4:i*4+4]]
+    return b64decode(retVal.encode('utf-8')).decode('utf-8')
+
+
+def wraps(string: str, every=64):
+    return '\n'.join(string[i:i+every] for i in range(0, len(string), every))
+
+
+if decode == False:
+    if fileName == "":
+        # stdin
+        encodedStr = b114514encode(sys.stdin.read())
+    else:
+        # file
+        encodedStr = b114514encode(open(fileName).read())
+    if wrap == 0:
+        print(encodedStr, end='')
+    else:
+        print(wraps(encodedStr, wrap), end='')
+else:
+    if fileName == "":
+        # stdin
+        decodedStr = b114514decode(sys.stdin.read().strip(), ignoreGarbage)
+    else:
+        # file
+        decodedStr = b114514decode(
+            open(fileName).read().strip(), ignoreGarbage)
+    print(decodedStr, end='')
