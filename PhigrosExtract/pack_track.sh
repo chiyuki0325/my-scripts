@@ -7,7 +7,7 @@ mkdir "../packed"
 for song in *;do
 pushd "$song"
 newname="`printf "$song" | sed "s/\.0//" | sed -E "s/(.*)\./\1 - /"`"
-rm music.wav
+if [ -f music.ogg ];then rm music.wav;fi
 7z a "../../packed/${newname}.zip" .
 popd
 done
