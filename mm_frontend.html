@@ -1,0 +1,27 @@
+<html>
+
+<body>
+    <div align="right">
+        <span id="dynamic" style="visibility: hidden">动态变化的文字</span>
+        <span>游戏: Mario Multiverse (没有下载地址)</span>
+    </div>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var dynamic = document.getElementById('dynamic');
+        var response;
+        setInterval(function () {
+            xhr.open('GET', 'http://localhost:8889/', false)
+            xhr.send();
+            response = JSON.parse(xhr.responseText);
+            if (response['status'] == 'playing') {
+                if (dynamic.style.visibility == 'hidden') { dynamic.style.visibility = 'visible'; };
+                dynamic.innerHTML = '当前正在游玩关卡: ' + response['level_name'] + ' 作者: ' + response['author'] + '<br id="brbrbr">';
+            } else {
+                if (brbrbr = document.getElementById('brbrbr')) {brbrbr.remove()}
+                if (dynamic.style.visibility == 'visible') { dynamic.style.visibility = 'hidden'; };
+            }
+        }, 500)
+    </script>
+</body>
+
+</html>
