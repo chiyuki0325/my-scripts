@@ -1,6 +1,6 @@
 #!/usr/bin/python
-import evdev,subprocess
-device = evdev.InputDevice('/dev/input/event6')
+import evdev,subprocess, sys
+device = evdev.InputDevice(sys.argv[1])
 print(device)
 X=1;Y=1
 for event in device.read_loop():
