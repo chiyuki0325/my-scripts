@@ -61,9 +61,15 @@
     border-radius: 4px;
     padding: 6px;
     font-size: 14px;
-    border-bottom: 1px solid var(--fluent-theme-color);
+    border: 1px solid rgb(209, 209, 209);
+    border-bottom: 1px solid;
     margin-left: 3px;
     margin-bottom: 3px;
+	transition: border-bottom-color ease-in-out .1s;
+}
+
+.vac-textarea:focus {
+    border-bottom-color: var(--fluent-theme-color)
 }
 
 .vac-room-header.vac-app-border-b { /*对话名显示*/
@@ -93,18 +99,24 @@ a > div.root {
 
 /*搜素框*/
 .el-input__inner {
-    border: 1px solid rgba(0,0,0,.1) !important;
-    border-bottom: 1px solid var(--fluent-theme-color) !important;
+    border: 1px solid rgb(209, 209, 209) !important;
+    border-bottom: 1px solid !important;
     line-height: 32px;
     height: 32px;
+	transition: border-bottom-color ease-in-out .1s;
+}
+.el-input__inner {
+    border-bottom-color: var(--fluent-theme-color);
 }
 .el-input__icon {
     line-height: unset !important;
 }
 
-.vac-textarea:hover { /*输入框悬停阴影效果*/
+/*输入框悬停阴影效果
+.vac-textarea:hover { 
 	box-shadow: 0 0 1px 0px rgba(0,0,0,0.08), 0 0 4px 0px rgba(0,0,0,0.04);
 }
+*/
 
 .vac-icon-textarea { /*输入框图标（表情附件等）*/
     margin: 6px 0 0 6px;
