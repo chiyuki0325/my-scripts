@@ -268,7 +268,7 @@ button.el-button.el-button--default.el-button--mini {
 }
 
 .getting-history {
-    display: hidden
+    visibility: hidden !important;
 }
 
 * {
