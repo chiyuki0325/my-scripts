@@ -42,6 +42,10 @@
     background: var(--fake-mica) !important;
 }
 
+div.root > div.head {
+    border-right: 1px solid rgb(209, 209, 209) !important;
+}
+
 .head { /*搜索条区域和头像为什么都是head啊QAQ*/
     height: 56px !important;
     min-height: 56px !important;
@@ -62,7 +66,7 @@
     padding: 6px;
     font-size: 14px;
     border: 1px solid rgb(209, 209, 209);
-    border-bottom: 1px solid;
+    border-bottom: 2px solid grey;
     margin-left: 3px;
     margin-bottom: 3px;
 	transition: border-bottom-color ease-in-out .1s;
@@ -100,7 +104,7 @@ a > div.root {
 /*搜素框*/
 .el-input__inner {
     border: 1px solid rgb(209, 209, 209) !important;
-    border-bottom: 1px solid !important;
+    border-bottom: 2px solid grey !important;
     line-height: 32px;
     height: 32px;
 	transition: border-bottom-color ease-in-out .1s;
@@ -133,7 +137,7 @@ a > div.root:not(.selected):hover {
 }
 a > div.root:not(.selected) > div.entry:hover {
     background-color: var(--panel-item-bg-hover) !important;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 div.entry {
@@ -264,8 +268,7 @@ button.el-button.el-button--default.el-button--mini {
 }
 
 .getting-history {
-    background-color: white !important;
-    box-shadow: 0 1px 1px -1px rgb(0 0 0 / 10%), 0 1px 1px -1px rgb(0 0 0 / 11%), 0 1px 2px -1px rgb(0 0 0 / 11%);
+    display: hidden
 }
 
 * {
