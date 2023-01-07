@@ -88,11 +88,12 @@
         margin: 8px 0 8px auto;
     }
     
-    .mx_RoomHeader_button:not(.mx_RoomHeader_closeButton):hover::before, .mx_RightPanel_headerButton_highlight::before, .mx_RightPanel_headerButton:hover::before { /*高亮*/
+    .mx_RoomHeader_button:not(.mx_RoomHeader_closeButton):hover::before, .mx_RightPanel_headerButton_highlight::before, .mx_RightPanel_headerButton:hover::before,
+    .mx_MessageComposer_button:hover::before { /*高亮*/
         background-color: var(--fluent-theme-color) !important;
     }
     
-    .mx_RoomHeader_button:not(.mx_RoomHeader_closeButton):hover, .mx_RightPanel_headerButton:hover {
+    .mx_RoomHeader_button:not(.mx_RoomHeader_closeButton):hover, .mx_RightPanel_headerButton:hover, .mx_MessageComposer_button:hover::after {
         background: rgba(0, 120, 212, 0.1) !important;
     }
     
@@ -103,5 +104,13 @@
     .mx_EventTile[data-layout="bubble"][data-self="true"] .mx_EventTile_line .mx_MImageBody {
         display: flex;
         justify-content: flex-end;
+    }
+    
+    .mx_MessageComposer_sendMessage { /*发送按钮*/
+        background-color: var(--fluent-theme-color) !important;
+    }
+    
+    .mx_SpacePanel .mx_SpaceButton.mx_SpaceButton_active.mx_SpaceButton_narrow .mx_SpaceButton_selectionWrapper { /*最左侧已选中*/
+        border-color: #737d8c
     }
 }
