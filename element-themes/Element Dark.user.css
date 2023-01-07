@@ -1,0 +1,13 @@
+/* ==UserStyle==
+@name           Element Dark
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    YidaozhanYa's Element style (Dark Ext)
+@author         YidaozhanYa
+==/UserStyle== */
+@-moz-document url-prefix("develop.element.io") {
+    * { /*定义变量*/
+        --fluent-theme-color: #4cc2ff;
+        --fake-mica: #202020 radial-gradient(#1a1f35 25%, #202020 100%) no-repeat fixed;
+    }
+}
