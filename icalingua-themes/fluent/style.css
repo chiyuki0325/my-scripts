@@ -65,15 +65,15 @@ div.root > div.head {
     border-radius: 4px;
     padding: 6px;
     font-size: 14px;
-    border: 1px solid rgb(209, 209, 209);
-    border-bottom: 2px solid grey;
+    border: 2px solid rgb(230, 230, 230);
     margin-left: 3px;
     margin-bottom: 3px;
+    border-bottom: 1px solid grey;
 	transition: border-bottom-color ease-in-out .1s;
 }
 
 .vac-textarea:focus {
-    border-bottom-color: var(--fluent-theme-color)
+    border-bottom-color: var(--fluent-theme-color);
 }
 
 .vac-room-header.vac-app-border-b { /*对话名显示*/
@@ -196,11 +196,6 @@ div.chat-group > a > div.selected {
     border: 1px solid rgba(0,0,0,0.05);
 }
 
-/*消息*/
-.vac-messages-container {
-    padding: 0 8px 5px;
-}
-
 
 div[message-actions] {
     padding-top: 4px;
@@ -277,4 +272,18 @@ button.el-button.el-button--default.el-button--mini {
 
 .el-badge * {
     font-family: inherit;
+}
+
+
+
+div.el-message-box, .el-notification { /*消息框*/
+    background-color: white !important;
+}
+
+.el-button--primary {
+    background-color: var(--fluent-theme-color);
+}
+
+.vac-media-file { /*发送图片/视频*/
+    padding: 3px 3px 0 7px
 }
