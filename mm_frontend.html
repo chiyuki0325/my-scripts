@@ -1,27 +1,139 @@
 <html>
+  <style>
+    body {
+      padding: 8px;
+    }
+    .main {
+      font-size: 25px;
+      font-weight: bold;
+      color: white;
+      font-family: "Super Mario Maker 2", "FZZongYi-M05S";
+      -webkit-text-stroke: 1px black;
 
-<body>
+      display: flex;
+      justify-content: space-between;
+
+      transition: opacity ease-in-out 300ms;
+    }
+    .focus {
+      color: yellow;
+    }
+  </style>
+
+  <body>
     <div align="right">
-        <span id="dynamic" style="visibility: hidden">动态变化的文字</span>
-        <span>游戏: Mario Multiverse (没有下载地址)</span>
+      <span class="main" id="main1" style="display: flex">
+        <span>游戏: <span class="focus">超级马里奥 多元宇宙</span></span>
+        <span id="playing" style="display: block">
+          <span>关卡: </span>
+          <span id="name" class="focus"></span>
+          <span> 作者: </span>
+          <span id="author" class="focus"></span>
+        </span>
+        <span id="notplaying" style="display: none"></span>
+        <span id="clearinfo">
+          <span>当前已通过</span>
+          <span class="focus" id="clears">0</span>
+          <span>关</span>
+        </span>
+      </span>
+      <span class="main" id="main2" style="display: none">
+        <span>游戏: <span class="focus">超级马里奥 多元宇宙</span></span>
+        <span>挑战模式规则: <span class="focus">无 1UP</span>，初始打到最后尽量不失命</span>
+      </span>
     </div>
     <script>
-        var xhr = new XMLHttpRequest();
-        var dynamic = document.getElementById('dynamic');
-        var response;
-        setInterval(function () {
-            xhr.open('GET', 'http://localhost:8889/', false)
-            xhr.send();
-            response = JSON.parse(xhr.responseText);
-            if (response['status'] == 'playing') {
-                if (dynamic.style.visibility == 'hidden') { dynamic.style.visibility = 'visible'; };
-                dynamic.innerHTML = '当前正在游玩关卡: ' + response['level_name'] + ' 作者: ' + response['author'] + '<br id="brbrbr">';
-            } else {
-                if (brbrbr = document.getElementById('brbrbr')) {brbrbr.remove()}
-                if (dynamic.style.visibility == 'visible') { dynamic.style.visibility = 'hidden'; };
-            }
-        }, 500)
-    </script>
-</body>
+      function $(elementId) {
+        return document.getElementById(elementId);
+      }
 
+      function show(element) {
+        element.style.display = "block";
+      }
+
+      function showFlex(element) {
+        element.style.display = "flex";
+      }
+
+      function hide(element) {
+        element.style.display = "none";
+      }
+
+      function isVisible(element) {
+        return !(element.style.display == "none");
+      }
+
+      function slowShow(element) {
+        element.style.opacity = 0;
+        showFlex(element);
+        element.style.opacity = 1;
+      }
+
+      function slowHide(element) {
+        element.style.opacity = 0;
+        setTimeout(() => {
+          hide(element);
+        }, 300);
+      }
+
+      const xhr = new XMLHttpRequest();
+      const playing = $("playing");
+      const notPlaying = $("notplaying");
+      const levelName = $("name");
+      const author = $("author");
+      const clearInfo = $("clearinfo");
+
+      const main1 = $("main1");
+      const main2 = $("main2");
+      var isChallenge = true;
+
+      setInterval(() => {
+        xhr.open("GET", "/status", false);
+        xhr.send();
+        const response = JSON.parse(xhr.responseText);
+        if (response["status"] == "playing") {
+          if (!isVisible(playing)) {
+            show(playing);
+            hide(notPlaying);
+          }
+          levelName.innerText = response["level_name"];
+          author.innerText = response["author"];
+          isChallenge = response["is_challenge"];
+          if (isChallenge) {
+            show(clearInfo);
+            $("clears").innerText = response["clears"];
+          } else {
+            if (isVisible(clearInfo)) {
+              hide(clearInfo);
+            }
+          }
+        } else {
+          if (isVisible(playing)) {
+            hide(playing);
+            show(notPlaying);
+          }
+        }
+      }, 500);
+      setInterval(() => {
+        if (isChallenge) {
+            if (isVisible(main1)) {
+                slowHide(main1);
+                setTimeout(() => {
+                    slowShow(main2);
+                }, 300);
+            } else {
+                slowHide(main2);
+                setTimeout(() => {
+                    slowShow(main1);
+                }, 300);
+            }
+        } else {
+          //if (isVisible(main2)) {
+            hide(main2);
+            show(main1);
+          //}
+        }
+      }, 10000);
+    </script>
+  </body>
 </html>
