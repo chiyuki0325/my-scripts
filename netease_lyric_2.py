@@ -13,10 +13,7 @@ API_ROOT: str = "http://localhost:3000"
 for root, _, files in os.walk(sys.argv[1]):
     for file in files:
         file_name: str = ".".join(file.split(".")[:-1]).strip()
-        try:
-            song_name: str = ".".join(file.split(".")[:-1]).split(" - ")[1].strip()
-        except IndexError:
-            song_name: str = ".".join(file.split(".")[:-1]).strip()
+        song_name: str = file_name
         print(song_name)
         response = requests.get(
             url=f"{API_ROOT}/cloudsearch?keywords={song_name}",
