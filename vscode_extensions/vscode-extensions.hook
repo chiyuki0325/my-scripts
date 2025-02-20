@@ -1,0 +1,9 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = code
+
+[Action]
+When = PostTransaction
+Exec = /bin/bash -c 'sed -i \'s#https://open-vsx.org/vscode/gallery#https://marketplace.visualstudio.com/_apis/public/gallery#\' /usr/lib/code/product.json; sed -i \'s#"itemUrl": "https://open-vsx.org/vscode/item"#"itemUrl": "https://marketplace.visualstudio.com/items","cacheUrl": "https://vscode.blob.core.windows.net/gallery/index"#\' /usr/lib/code/product.json'

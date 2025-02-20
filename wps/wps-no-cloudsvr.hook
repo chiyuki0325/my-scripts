@@ -1,0 +1,8 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = wps-office-365
+[Action]
+When = PostTransaction
+Exec = /usr/bin/bash -c 'mv /opt/kingsoft/wps-office/office6/EverythingDaemon /opt/kingsoft/wps-office/office6/EverythingDaemon.bak; mv /opt/kingsoft/wps-office/office6/wpscloudsvr /opt/kingsoft/wps-office/office6/wpscloudsvr.bak'

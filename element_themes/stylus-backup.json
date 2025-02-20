@@ -1,0 +1,183 @@
+[
+  {
+    "settings": {
+      "openEditInWindow": false,
+      "openEditInWindow.popup": false,
+      "windowPosition": {},
+      "show-badge": true,
+      "disableAll": false,
+      "exposeIframes": false,
+      "exposeStyleName": false,
+      "newStyleAsUsercss": true,
+      "styleViaXhr": false,
+      "patchCsp": false,
+      "config.autosave": true,
+      "schemeSwitcher.enabled": "system",
+      "schemeSwitcher.nightStart": "18:00",
+      "schemeSwitcher.nightEnd": "06:00",
+      "popup.breadcrumbs": true,
+      "popup.breadcrumbs.usePath": false,
+      "popup.enabledFirst": true,
+      "popup.stylesFirst": true,
+      "popup.autoResort": false,
+      "popup.borders": false,
+      "popup.findSort": "u",
+      "manage.onlyEnabled": false,
+      "manage.onlyLocal": false,
+      "manage.onlyUsercss": false,
+      "manage.onlyEnabled.invert": false,
+      "manage.onlyLocal.invert": false,
+      "manage.onlyUsercss.invert": false,
+      "manage.actions.expanded": true,
+      "manage.backup.expanded": true,
+      "manage.filters.expanded": true,
+      "manage.newUI": true,
+      "manage.newUI.favicons": false,
+      "manage.newUI.faviconsGray": true,
+      "manage.newUI.targets": 3,
+      "manage.newUI.sort": "title,asc",
+      "editor.options": {},
+      "editor.toc.expanded": true,
+      "editor.options.expanded": true,
+      "editor.lint.expanded": true,
+      "editor.publish.expanded": true,
+      "editor.lineWrapping": true,
+      "editor.smartIndent": true,
+      "editor.indentWithTabs": false,
+      "editor.tabSize": 4,
+      "editor.keyMap": "default",
+      "editor.theme": "default",
+      "editor.beautify": {
+        "selector_separator_newline": true,
+        "newline_before_open_brace": false,
+        "newline_after_open_brace": true,
+        "newline_between_properties": true,
+        "newline_before_close_brace": true,
+        "newline_between_rules": false,
+        "preserve_newlines": true,
+        "end_with_newline": false,
+        "indent_conditional": true,
+        "indent_mozdoc": true
+      },
+      "editor.beautify.hotkey": "",
+      "editor.lintDelay": 300,
+      "editor.linter": "csslint",
+      "editor.lintReportDelay": 500,
+      "editor.matchHighlight": "token",
+      "editor.autoCloseBrackets": true,
+      "editor.autocompleteOnTyping": false,
+      "editor.contextDelete": false,
+      "editor.selectByTokens": true,
+      "editor.appliesToLineWidget": true,
+      "editor.autosaveDraft": 10,
+      "editor.livePreview": true,
+      "editor.colorpicker": true,
+      "editor.colorpicker.hexUppercase": false,
+      "editor.colorpicker.hotkey": "",
+      "editor.colorpicker.color": "",
+      "editor.colorpicker.maxHeight": 300,
+      "hotkey._execute_browser_action": "",
+      "hotkey.openManage": "",
+      "hotkey.styleDisableAll": "",
+      "sync.enabled": "none",
+      "iconset": -1,
+      "badgeDisabled": "#8B0000",
+      "badgeNormal": "#006666",
+      "headerWidth.edit": 365,
+      "headerWidth.install": 365,
+      "headerWidth.manage": 365,
+      "popupWidth": 246,
+      "updateInterval": 24
+    },
+    "order": {
+      "main": [],
+      "prio": []
+    }
+  },
+  {
+    "enabled": true,
+    "installDate": 1673060398799,
+    "sections": [
+      {
+        "code": ""
+      }
+    ],
+    "customName": "Element Base",
+    "sourceCode": "/* ==UserStyle==\n@name           Element Base\n@namespace      github.com/openstyles/stylus\n@version        1.0.0\n@description    YidaozhanYa's Element style\n@author         YidaozhanYa\n==/UserStyle== */\n\n@-moz-document domain(\"develop.element.io\") {\n    * { /*缩小全局间距*/\n        --gutterSize: 8px !important;\n    }\n    \n    .mx_EventTile_line { /*不让右侧间距过大*/\n        padding-right: 8px !important;\n    }\n    \n    .mx_EventTile_line { /*缩小消息圆角*/\n        --cornerRadius: 8px !important;\n    }\n    \n    .mx_MStickerBody_wrapper { /*缩小贴纸大小*/\n        width: 60%;\n    }\n    \n    .mx_EventTile > .mx_DisambiguatedProfile { /*增大消息间间距*/\n        margin-top: 8px !important;\n    }\n    \n    .mx_DisambiguatedProfile_displayName { /*取消姓名加粗*/\n        font-weight: normal !important;\n    }\n    \n    .mx_EventTile_e2eIcon { /*隐藏网页版不能e2e的图标*/\n        visibility: hidden;\n        width: 0;\n        padding: 0 !important\n    }\n    \n    .mx_RoomView_wrapper { /*白色太瞎眼了*/\n        background-color: #fcfcfc !important\n    }\n    \n    div.mx_BackdropPanel > img { /*防止element取头像模糊当背景*/\n        visibility: hidden;\n    }\n    \n    div.mx_BackdropPanel { /*使用自定义的背景色*/\n        background: var(--fake-mica) !important;\n    }\n    \n    .mx_SpacePanel, .mx_LeftPanel_wrapper, .mx_LeftPanel_wrapper--user {\n        background-color: unset !important;\n    }\n    \n    .mx_RoomTile.mx_RoomTile_selected, .mx_RoomTile:hover, .mx_RoomTile:focus-within, .mx_RoomTile.mx_RoomTile_hasMenuOpen {\n        border-radius: 4px;\n    }\n    \n    .mx_RoomTile.mx_RoomTile_selected::before { /*小蓝条*/\n        content: \"\";\n        background-color: var(--fluent-theme-color);\n        width: 3px;\n        position: relative;\n        right: 5px;\n        height: 20px;\n        top: 6px;\n    }\n    \n    .mx_TopUnreadMessagesBar::after { /*删除未读消息按钮上的小绿点*/\n        content: unset !important;\n    }\n    \n    .mx_RoomView_myReadMarker { /*删除未读绿条*/\n        visibility: hidden;\n        border-top: unset;\n        border-bottom: unset;\n        height: 26px;\n    }\n    \n    .mx_EventTile[data-layout=\"bubble\"] .mx_MessageTimestamp { /*将时间标签移出气泡*/\n        left: 5rem;\n        position: relative;\n        top: 4px;\n    }\n    \n    .mx_LinkPreviewWidget { /*链接预览*/\n        margin: 8px 0 8px auto;\n    }\n    \n    .mx_RoomHeader_button:not(.mx_RoomHeader_closeButton):hover::before, .mx_RightPanel_headerButton_highlight::before, .mx_RightPanel_headerButton:hover::before,\n    .mx_MessageComposer_button:hover::before { /*高亮*/\n        background-color: var(--fluent-theme-color) !important;\n    }\n    \n    .mx_RoomHeader_button:not(.mx_RoomHeader_closeButton):hover, .mx_RightPanel_headerButton:hover, .mx_MessageComposer_button:hover::after {\n        background: rgba(0, 120, 212, 0.1) !important;\n    }\n    \n    .mx_EventTile[data-layout=\"bubble\"][data-self=\"true\"] .mx_EventTile_sticker {\n        margin-right: unset !important;\n    }\n    \n    .mx_EventTile[data-layout=\"bubble\"][data-self=\"true\"] .mx_EventTile_line .mx_MImageBody {\n        display: flex;\n        justify-content: flex-end;\n    }\n    \n    .mx_MessageComposer_sendMessage { /*发送按钮*/\n        background-color: var(--fluent-theme-color) !important;\n    }\n    \n    .mx_SpacePanel .mx_SpaceButton.mx_SpaceButton_active.mx_SpaceButton_narrow .mx_SpaceButton_selectionWrapper { /*最左侧已选中*/\n        border-color: #737d8c\n    }\n}",
+    "usercssData": {
+      "name": "Element Base",
+      "namespace": "github.com/openstyles/stylus",
+      "version": "1.0.0",
+      "description": "YidaozhanYa's Element style",
+      "author": "YidaozhanYa"
+    },
+    "author": "YidaozhanYa",
+    "description": "YidaozhanYa's Element style",
+    "name": "Element Base",
+    "updateDate": 1673065042628,
+    "_id": "2acf7294-afcb-4adb-b57f-60251ef6fbd6",
+    "_rev": 1673065042628,
+    "id": 2,
+    "preferScheme": "none",
+    "inclusions": [
+      "*://develop.element.io/*",
+      "*://app.element.io/*"
+    ]
+  },
+  {
+    "enabled": true,
+    "installDate": 1673064167379,
+    "sections": [
+      {
+        "code": ""
+      }
+    ],
+    "customName": "Element Light",
+    "sourceCode": "/* ==UserStyle==\n@name           Element Light\n@namespace      github.com/openstyles/stylus\n@version        1.0.0\n@description    YidaozhanYa's Element style (Light Ext)\n@author         YidaozhanYa\n==/UserStyle== */\n@-moz-document url-prefix(\"develop.element.io\") {\n    * { /*定义变量*/\n        --fluent-theme-color: #0078d4;\n        --fake-mica: #f3f3f3 radial-gradient(#eff4f9 50%, #f3f3f3 100%) no-repeat fixed;\n    }\n}",
+    "usercssData": {
+      "name": "Element Light",
+      "namespace": "github.com/openstyles/stylus",
+      "version": "1.0.0",
+      "description": "YidaozhanYa's Element style (Light Ext)",
+      "author": "YidaozhanYa"
+    },
+    "author": "YidaozhanYa",
+    "description": "YidaozhanYa's Element style (Light Ext)",
+    "name": "Element Light",
+    "updateDate": 1673064268025,
+    "_id": "fbb3ce6c-1481-47e0-898c-dc14823094ad",
+    "_rev": 1673064610070,
+    "id": 3,
+    "preferScheme": "light",
+    "inclusions": [
+      "*://develop.element.io/*",
+      "*://app.element.io/*"
+    ]
+  },
+  {
+    "enabled": true,
+    "installDate": 1673064260558,
+    "sections": [
+      {
+        "code": ""
+      }
+    ],
+    "customName": "Element Dark",
+    "sourceCode": "/* ==UserStyle==\n@name           Element Dark\n@namespace      github.com/openstyles/stylus\n@version        1.0.0\n@description    YidaozhanYa's Element style (Dark Ext)\n@author         YidaozhanYa\n==/UserStyle== */\n@-moz-document url-prefix(\"develop.element.io\") {\n    * { /*定义变量*/\n        --fluent-theme-color: #4cc2ff;\n        --fake-mica: #202020 radial-gradient(#1a1f35 25%, #202020 100%) no-repeat fixed;\n    }\n}",
+    "usercssData": {
+      "name": "Element Dark",
+      "namespace": "github.com/openstyles/stylus",
+      "version": "1.0.0",
+      "description": "YidaozhanYa's Element style (Dark Ext)",
+      "author": "YidaozhanYa"
+    },
+    "author": "YidaozhanYa",
+    "description": "YidaozhanYa's Element style (Dark Ext)",
+    "name": "Element Dark",
+    "updateDate": 1673064338772,
+    "_id": "ddd9e49f-c45d-4e92-98c2-083b681ee5e7",
+    "_rev": 1673064610071,
+    "id": 4,
+    "preferScheme": "dark"
+  }
+]

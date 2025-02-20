@@ -1,0 +1,13 @@
+/* ==UserStyle==
+@name           Element Light
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    YidaozhanYa's Element style (Light Ext)
+@author         YidaozhanYa
+==/UserStyle== */
+@-moz-document url-prefix("develop.element.io") {
+    * { /*定义变量*/
+        --fluent-theme-color: #0078d4;
+        --fake-mica: #f3f3f3 radial-gradient(#eff4f9 50%, #f3f3f3 100%) no-repeat fixed;
+    }
+}
