@@ -1,5 +1,0 @@
-#!/bin/bash
-
-RESULT=$(python3 /usr/local/bin/yinglish.py $(xclip -o -sel clip))
-echo "${RESULT}~♥" | xclip -i -sel clip -t text/plain
-notify-send "已经复制到剪贴板。" -u low -t 500 -a "qwq"
