@@ -7,6 +7,7 @@ import requests
 import os
 import sys
 import re
+import time
 
 API_ROOT: str = "http://localhost:3000"
 
@@ -81,3 +82,5 @@ for root, _, files in os.walk(sys.argv[1]):
 
         with open(os.path.join(root, f"{file_name}.lrc"), "w") as f:
             f.write(output_lyric)
+
+        time.sleep(5)
